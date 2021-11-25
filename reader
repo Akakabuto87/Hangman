@@ -1,3 +1,5 @@
+#List of English Words:    https://github.com/dwyl/english-words
+
 text = open("words.txt", "r")
 lines = text.readlines()
 qualified_words = []
