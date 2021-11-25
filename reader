@@ -1,0 +1,22 @@
+text = open("words.txt", "r")
+lines = text.readlines()
+qualified_words = []
+lines_test_start = 0
+lines_test = 10000000
+print_skip = 10
+only_number_of_letters =5
+for i, line in enumerate(lines[lines_test_start:lines_test_start+lines_test]):
+    word = line.strip()
+    if word.isalpha() and word.islower():
+        if len(word) == only_number_of_letters:
+            qualified_words.append(word)
+        #     print( "the word before:   ",lines[i-1].strip(),type(lines[i-1].strip()))
+        # if word + "s" == lines[i-1].strip():
+        #     print("flertal:                      ",word, "  and  ", lines[i-1].strip())
+print("\n\nnumber of qualified words: ", len(qualified_words))
+
+printed_words = 20
+print_skip = len(qualified_words) // printed_words
+for i in range(printed_words):
+    print(qualified_words[i*print_skip])
+    
