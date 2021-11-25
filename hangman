@@ -1,0 +1,69 @@
+""" make it into an AI """
+
+
+
+from random import randrange
+text = open("words.txt", "r")
+words = text.readlines()
+
+def print_hm(word,gue):
+    print("------------------------------------------------------------")
+    print("Progress:        ",end=" ")
+    for i, letter in enumerate(word):
+        if letter != "":
+            print(letter, end=" ")
+        else:
+            print("_", end=" ")
+    print("")
+    print("Used letters:    ",end=" ")
+    if len(gue) > 0:
+        for i, letter in enumerate(gue):
+            print(letter, end=" ")
+    print("\n------------------------------------------------------------")
+    
+    
+
+max_word_length = 10
+min_word_length = 5
+length_not_correct = True
+while length_not_correct:
+    w = list(words[randrange(len(words))].strip().upper())
+    if len(w) < max_word_length and len(w) > min_word_length:
+        length_not_correct = False
+
+# w = ["A","P","E"]
+
+# print_hm(w)
+
+wg = [""]*len(w)
+gue = []
+print("------------------------------------------------------------")
+print("Wellcome to Hangman. \nYou know the rules, so let's get started")
+print("------------------------------------------------------------")
+print("It's a", len(w), "letter word.")
+# print_hm(w)
+guess_count = 0
+while "" in wg:
+    print_hm(wg,gue)
+    guess_count += 1
+    count = 0
+    g = input("- Guess a letter or the whole word...").upper()
+    if len(g) == 1:
+        for i, le in enumerate(w):
+            if le == g:
+                wg[i] = g
+                count += 1
+        if count > 0:
+            print("            - Yay.. The letter", g, "is used", count, "times in the word")
+        else:
+            print("            - The letter", g, "is not in the word ")
+            gue.append(g)
+    else:
+        if list(g.upper()) == w:
+            wg = w[:]
+            print("            - That is exactly the word!")
+    
+            
+
+print("\n Congratulations!!!\n You found the word in", guess_count, "guesses!")
+print_hm(wg,gue)
